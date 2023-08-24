@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\VisitorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +38,5 @@ Route::post('/resetpassword',[ResetController::class, 'ResetPassword']);
 // User
 Route::get('/user',[UserController::class, 'User'])->middleware('auth:sanctum');
 
-// User
-Route::get('/user',[UserController::class, 'User'])->middleware('auth:sanctum');
+// Visitor
+Route::get('/getvisitor',[VisitorController::class, 'GetVisitorDetails']);
