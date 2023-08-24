@@ -1,5 +1,11 @@
 import React, { Component } from "react";
+import { Form } from "react-bootstrap";
 import { styled } from "styled-components";
+import validation from '../../validation/Validation';
+import axios from 'axios' 
+import appURL from '../../api/appURL';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Content = styled.div`
     padding: 7rem 0; 
@@ -60,6 +66,77 @@ const StyledLink = styled.a`
 `
 
 class Contact extends Component {
+
+    constructor() {
+        super();
+        this.state={
+            name:"",
+            email:"",
+            message:"",
+        }
+    }
+
+        nameOnChange = (event) => {
+            let name = event.target.value;
+            //alert(name);
+            this.setState({name: name})
+        }
+        
+        emailOnChange = (event) => {
+            let email = event.target.value;
+            //alert(email);
+            this.setState({email: email})
+        }
+
+        messageOnChange = (event) => {
+            let message = event.target.value;
+            //alert(message);
+            this.setState({message: message})
+        }
+
+        onFormSubmit = (event) => {
+            // alert("message");
+            let name = this.state.name;
+            let email = this.state.email;
+            let message = this.state.message;
+            let sendBtn = document.getElementById('sendBtn');
+            let contactForm = document.getElementById('contactForm');
+
+            if(message.length == 0) {
+                toast.error("There was a problem delivering your message. Message can't be empty, please try again.");
+            } else if(name.length == 0) {
+                toast.error("Please write your name.");
+            } else if(email.length == 0) {
+                toast.error("Please write your email.");
+            } else if(!(validation.nameRegex).test(name)) {
+                toast.error("Invalid name.");
+            } else {
+                sendBtn.innerHTML="Sending...";
+                let myFormData = new FormData();
+                myFormData.append("name", name);
+                myFormData.append("email", email);
+                myFormData.append("message", message);
+
+                axios.post(appURL.PostContact, myFormData)
+                .then(function(response){
+                    if(response.status == 200 && response.data == 1) {
+                        toast.success("Message sent, thank you for your support.");
+                        sendBtn.innerHTML="Send Message";
+                        contactForm.reset();
+                    } else {
+                        toast.error("error");
+                        sendBtn.innerHTML="Send Message";
+                    }
+                })
+                .catch(function(error) {
+                    toast.error(error);
+                    sendBtn.innerHTML="Send Message";
+                });
+            }
+
+            event.preventDefault();
+        }
+
     render() {
         return (
             <Content>
@@ -73,14 +150,17 @@ class Contact extends Component {
                                     </StyledH2>
 
                                     <form
+                                        id="contactForm"
+                                        onSubmit={this.onFormSubmit}
                                         className="border-right pr-5 mb-5"
-                                        method="post"
+                                        // method="post"
                                         id="contactForm"
                                         name="contactForm"
                                     >
                                         <div className="row">
                                             <div className="col-md-6 form-group">
                                                 <StyledForm
+                                                    onChange={this.nameOnChange}
                                                     type="text"
                                                     className="form-control"
                                                     name="fname"
@@ -101,6 +181,7 @@ class Contact extends Component {
                                         <div className="row">
                                             <div className="col-md-12 form-group">
                                                 <StyledForm
+                                                    onChange={this.emailOnChange}
                                                     type="text"
                                                     className="form-control"
                                                     name="email"
@@ -112,19 +193,20 @@ class Contact extends Component {
 
                                         <div className="row">
                                             <div className="col-md-12 form-group">
-                                                <textarea
+                                                <Form.Control as="textarea" rows={4}
+                                                    onChange={this.messageOnChange}
                                                     className="form-control"
                                                     name="message"
                                                     id="message"
                                                     cols="30"
-                                                    rows="7"
                                                     placeholder="Write your message"
-                                                ></textarea>
+                                                ></Form.Control>
                                             </div>
                                         </div>
                                         <div className="row">
                                             <div className="col-md-12">
                                                 <StyledButton
+                                                    id="sendBtn"
                                                     type="submit"
                                                     value="Send Message"
                                                     className="btn btn-primary rounded-0 py-2 px-4"
@@ -149,6 +231,7 @@ class Contact extends Component {
                         </div>
                     </div>
                 </div>
+                <ToastContainer/>
             </Content>
         );
     }

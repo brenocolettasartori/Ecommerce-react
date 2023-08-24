@@ -7,6 +7,7 @@ use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\VisitorController;
+use App\Http\Controllers\Admin\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,6 @@ Route::get('/user',[UserController::class, 'User'])->middleware('auth:sanctum');
 
 // Visitor
 Route::get('/getvisitor',[VisitorController::class, 'GetVisitorDetails']);
+
+// Contact
+Route::post('/postcontact',[ContactController::class, 'PostContactDetails']);
