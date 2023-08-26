@@ -4,6 +4,11 @@ import Footer from '../components/common/Footer'
 import Cart from '../components/Cart/Cart'
 
 class CartPage extends Component {
+
+  componentDidMount() {
+    window.scroll(0, 0);
+  }
+  
   render() {
     return (
       <Fragment>

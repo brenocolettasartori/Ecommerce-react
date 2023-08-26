@@ -19,7 +19,7 @@ class Footer extends Component {
                 </Col>
                 <Col className="p-2" lg={3} md={3} sm={6} xs={12}>
                     <h5 className="footer-menu-title">Lorem ipsum</h5>
-                    <Link to="/" className="footer-link">About us</Link><br></br>
+                    <Link to="/about" className="footer-link">About us</Link><br></br>
                     <Link to="/contact" className="footer-link">Contact us</Link><br></br>
                 </Col>
                 <Col className="p-2" lg={3} md={3} sm={6} xs={12}>

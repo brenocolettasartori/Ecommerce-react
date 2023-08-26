@@ -8,6 +8,7 @@ use App\Http\Controllers\ResetController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\VisitorController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,6 @@ Route::get('/getvisitor',[VisitorController::class, 'GetVisitorDetails']);
 
 // Contact
 Route::post('/postcontact',[ContactController::class, 'PostContactDetails']);
+
+// Category
+Route::get('/category',[CategoryController::class, 'AllCategory']);

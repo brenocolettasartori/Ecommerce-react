@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react'
-import { Container, Row, Col} from 'react-bootstrap'
+import { Container, Row, Col,} from 'react-bootstrap'
 
-class Purchase extends Component {
+class About extends Component {
   render() {
     return (
-      <Fragment>
+        <Fragment>
         <Container>
           <Row className="p-2">
             <Col className="shadow-sm bg-white mt-2" md={12} lg={12} sm={12} xs={12}>
-              <h4 className="section-title-login">Purchase Page </h4>
+              <h4 className="section-title-login">About us</h4>
               <p className="section-title-contact">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi laudantium placeat dolorem voluptate dolor modi voluptatibus explicabo corrupti aspernatur illo.
               <br></br><br></br>
@@ -26,4 +26,4 @@ class Purchase extends Component {
   }
 }
 
-export default Purchase
+export default About
