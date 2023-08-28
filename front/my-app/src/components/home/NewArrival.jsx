@@ -3,11 +3,16 @@ import { Col, Container, Row, Card } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import appURL from "../../api/appURL";
+import axios from "axios";
 
 class NewArrival extends Component {
   
     constructor(props) {
     super(props);
+    this.state={
+      ProductData:[]
+    }
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
   }
@@ -17,6 +22,16 @@ class NewArrival extends Component {
   previous() {
     this.slider.slickPrev();
   }
+
+  componentDidMount(){
+    axios.get(appURL.ProductListByType("news")).then(response =>{
+
+         this.setState({ProductData:response.data});         
+
+    }).catch(error=>{
+
+    });
+} 
 
   render() {
     var settings = {
@@ -57,6 +72,39 @@ class NewArrival extends Component {
       ],
     };
 
+    const newList = this.state.ProductData;
+    const myView = newList.map((newList, i) => {
+      if(newList.discount=="na"){
+        return <div>
+          <Card className="image-box card">
+          <img
+            className="center"
+            src={newList.image}
+            alt=""
+          />
+          <div class="card-body">
+            <p className="product-name-on-card">{newList.title}</p>
+            <p className="product-price-on-card">Price: {newList.price}</p>
+          </div>
+        </Card>
+        </div>
+      } else {
+        return <div>
+          <Card className="image-box card">
+          <img
+            className="center"
+            src={newList.image}
+            alt=""
+          />
+              <div class="card-body">
+              <p className="product-name-on-card">{newList.title}</p>
+              <p className="product-price-on-card"><strike className="text-secondary">Price: {newList.price}</strike></p>
+              </div>
+            </Card>
+        </div>
+      }
+    });
+
     return (
       <Fragment>
         <Container className="text-center" fluid={true}>
@@ -71,32 +119,7 @@ class NewArrival extends Component {
           </div>
           <Row>
             <Slider ref={c=>(this.slider=c)}{...settings}>
-              <div>
-                <Card className="image-box card">
-                  <img
-                    className="center"
-                    src="https://images.kabum.com.br/produtos/fotos/92748/cadeira-gamer-husky-snow-black-hsn-bk_1548093996_m.jpg"
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <p className="product-name-on-card">Lorem Ipsum</p>
-                    <p className="product-price-on-card">Price: $1</p>
-                  </div>
-                </Card>
-              </div>
-              <div>
-                <Card className="image-box card">
-                  <img
-                    className="center"
-                    src="https://images.kabum.com.br/produtos/fotos/471697/notebook-gamer-acer-nitro-5-an515-47-r5su-amd-ryzen-5-7535hs-8gb-nvidia-rtx-3050-ssd-512gb-15-6-full-hd-win-11-preto-nh-qlhal-001_1689859064_m.jpg"
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <p className="product-name-on-card">Lorem Ipsum</p>
-                    <p className="product-price-on-card">Price: $1</p>
-                  </div>
-                </Card>
-              </div>
+              {myView}
               <div>
                 <h3>3</h3>
               </div>

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import Slider from './Slider'
+
 
 class HomeTop extends Component {
 
@@ -10,7 +10,6 @@ class HomeTop extends Component {
         <Container className="p-0 m-0 overflow-hidden" fluid={true}>
             <Row>
                 <Col lg={9} md={9} sm={12}>
-                <Slider/>
                 </Col>
             </Row>
         </Container>

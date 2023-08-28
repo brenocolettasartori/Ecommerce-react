@@ -1,9 +1,71 @@
+import axios from "axios";
 import React, { Component, Fragment } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import appURL from "../../api/appURL";
+
 
 class FeaturedProducts extends Component {
+
+  constructor() {
+    super();
+    this.state={
+      ProductData: [],
+    }
+  }
+
+  componentDidMount() {
+    axios.get(appURL.ProductListByType("featured"))
+    .then(response => {
+      this.setState({ProductData:response.data})
+    })
+    .catch()
+  }
+
   render() {
+    const featuredList = this.state.ProductData;
+    const myView = featuredList.map((featuredList, i) => {
+      if(featuredList.discount=="na"){
+        return <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
+        <Link to="/productdetails">
+          <Card className="image-box card">
+            <img
+              className="center"
+              src={featuredList.image}
+              alt=""
+            />
+            <div class="card-body">
+              <p className="product-name-on-card">{featuredList.title}</p>
+              <p className="product-price-on-card">Price: ${featuredList.price}</p>
+              <a href="#" class="btn btn-primary">
+                Go somewhere
+              </a>
+            </div>
+          </Card>
+        </Link>
+      </Col>
+      } else {
+        return <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
+        <Link to="/productdetails">
+          <Card className="image-box card">
+            <img
+              className="center"
+              src={featuredList.image}
+              alt=""
+            />
+            <div class="card-body">
+              <p className="product-name-on-card">{featuredList.title}</p>
+              <p className="product-price-on-card"><strike className="text-secondary">Price: ${featuredList.price}</strike></p>
+              <a href="#" class="btn btn-primary">
+                Go somewhere
+              </a>
+            </div>
+          </Card>
+        </Link>
+      </Col>
+      }
+    });
+
     return (
       <Fragment>
         <Container className="text-center" fluid={true}>
@@ -12,40 +74,7 @@ class FeaturedProducts extends Component {
             <p>Some of our exclusive collection</p>
           </div>
           <Row>
-            <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
-              <Link to="/productdetails">
-                <Card className="image-box card">
-                  <img
-                    className="center"
-                    src="https://images5.kabum.com.br/produtos/fotos/467535/headset-gamer-hyperx-cloud-iii-dts-drivers-53mm-usb-pc-ps5-ps4-xbox-series-xis-xbox-one-nintendo-switch-mobile-preto-727aa9aa_1692025823_m.jpg"
-                    alt=""
-                  />
-                  <div class="card-body">
-                    <p className="product-name-on-card">Lorem Ipsum</p>
-                    <p className="product-price-on-card">Price: $1</p>
-                    <a href="#" class="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </Card>
-              </Link>
-            </Col>
-            <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
-              <Card className="image-box card">
-                <img
-                  className="center"
-                  src="https://images1.kabum.com.br/produtos/fotos/474991/nobreak-sms-lite-600bi-600va-110v-autonomia-de-55min-preto-0029202_1690804995_m.jpg"
-                  alt=""
-                />
-                <div class="card-body">
-                  <p className="product-name-on-card">Lorem Ipsum</p>
-                  <p className="product-price-on-card">Price: $1</p>
-                  <a href="#" class="btn btn-primary">
-                    Go somewhere
-                  </a>
-                </div>
-              </Card>
-            </Col>
+            {myView}
           </Row>
         </Container>
       </Fragment>

@@ -2,9 +2,10 @@ import React, { Component, Fragment } from "react";
 import { Col, Container, Row, Card } from "react-bootstrap";
 import axios from 'axios'
 import appURL from '../../api/appURL'
+import { Link } from "react-router-dom";
+
 
 class Categories extends Component {
-
 
   constructor() {
     super();
@@ -27,6 +28,7 @@ class Categories extends Component {
     const catList = this.state.MenuData;
     const myView = catList.map((catList, i) => {
       return <Col className="p-0" key={1} xl={2} lg={2} md={2} sm={6} xs={6}>
+          <Link to={"/recommended/" + catList.category_name}>
           <Card className="h-100 w-100 text-center">
             <div class="card-body">
             <img
@@ -37,6 +39,7 @@ class Categories extends Component {
             <h5 className="category-name">{catList.category_name}</h5>
             </div>
           </Card>
+          </Link>
         </Col>
     });
 

@@ -4,6 +4,11 @@ import Footer from '../components/common/Footer'
 import Favorite from '../components/Favorite/Favorite'
 
 class FavoritePage extends Component {
+  
+  componentDidMount() {
+    window.scroll(0, 0);
+  }
+
   render() {
     return (
       <Fragment>

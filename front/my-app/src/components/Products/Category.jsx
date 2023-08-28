@@ -1,42 +1,25 @@
 import React, { Component, Fragment } from 'react'
-import { Col, Container, Row, Card } from 'react-bootstrap'
-import { Link } from "react-router-dom";
-import appURL from "../../api/appURL";
-import axios from "axios";
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-class Collection extends Component {
-
-  constructor() {
-    super();
-    this.state={
-      ProductData: [],
-    }
-  }
-
-  componentDidMount() {
-    axios.get(appURL.ProductListByType("collection"))
-    .then(response => {
-      this.setState({ProductData:response.data})
-    })
-    .catch()
-  }
-
+class Category extends Component {
   render() {
 
-    const collectionList = this.state.ProductData;
-    const myView = collectionList.map((collectionList, i) => {
-      if(collectionList.discount=="na"){
+    const myList = this.props.productData;
+    const category = this.props.Category;
+    const myView = myList.map((myList, i) => {
+      if(myList.discount=="na"){
         return <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
         <Link to="/productdetails">
           <Card className="image-box card w-100">
             <img
               className="center w-75"
-              src={collectionList.image}
+              src={myList.image}
               alt=""
             />
             <div class="card-body">
-              <p className="product-name-on-card">{collectionList.title}</p>
-              <p className="product-price-on-card">Price: ${collectionList.price}</p>
+              <p className="product-name-on-card">{myList.title}</p>
+              <p className="product-price-on-card">Price: ${myList.price}</p>
               <a href="#" class="btn btn-primary">
                 Go somewhere
               </a>
@@ -50,12 +33,12 @@ class Collection extends Component {
           <Card className="image-box card">
             <img
               className="center"
-              src={collectionList.image}
+              src={myList.image}
               alt=""
             />
             <div class="card-body">
-              <p className="product-name-on-card">{collectionList.title}</p>
-              <p className="product-price-on-card"><strike className="text-secondary">Price: ${collectionList.price}</strike></p>
+              <p className="product-name-on-card">{myList.title}</p>
+              <p className="product-price-on-card"><strike className="text-secondary">Price: ${myList.price}</strike></p>
               <a href="#" class="btn btn-primary">
                 Go somewhere
               </a>
@@ -67,11 +50,10 @@ class Collection extends Component {
     });
 
     return (
-      <Fragment>
+        <Fragment>
         <Container className="text-center" fluid={true}>
         <div className="section-title text-center mb-55">
-                <h2>Product Collection</h2>
-                <p>Some of our exclusive collection</p>
+                <h2>{category}</h2>
             </div>
             <Row>
               {myView}
@@ -82,4 +64,4 @@ class Collection extends Component {
   }
 }
 
-export default Collection
+export default Category

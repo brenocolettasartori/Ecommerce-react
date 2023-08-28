@@ -5,6 +5,11 @@ import ProductDetails from '../components/Products/ProductDetails'
 import SuggestedProduct from '../components/Products/SuggestedProduct'
 
 class ProductDetailsPage extends Component {
+
+  componentDidMount() {
+    window.scroll(0, 0);
+  }
+  
   render() {
     return (
       <Fragment>
