@@ -10,7 +10,7 @@ class Category extends Component {
     const myView = myList.map((myList, i) => {
       if(myList.discount=="na"){
         return <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
-        <Link to="/productdetails">
+        <Link to={"/productdetails/" + myList.id}>
           <Card className="image-box card w-100">
             <img
               className="center w-75"
@@ -29,7 +29,7 @@ class Category extends Component {
       </Col>
       } else {
         return <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
-        <Link to="/productdetails">
+        <Link to={"/productdetails/" + myList.id}>
           <Card className="image-box card">
             <img
               className="center"

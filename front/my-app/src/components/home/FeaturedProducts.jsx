@@ -27,7 +27,7 @@ class FeaturedProducts extends Component {
     const myView = featuredList.map((featuredList, i) => {
       if(featuredList.discount=="na"){
         return <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
-        <Link to="/productdetails">
+        <Link to={"/productdetails/" + featuredList.id}>
           <Card className="image-box card">
             <img
               className="center"
@@ -46,7 +46,7 @@ class FeaturedProducts extends Component {
       </Col>
       } else {
         return <Col className="p-1" key={1} xl={2} lg={2} md={2} sm={4} xs={6}>
-        <Link to="/productdetails">
+        <Link to={"/productdetails/" + featuredList.id}>
           <Card className="image-box card">
             <img
               className="center"

@@ -9,6 +9,10 @@ class appURL {
     static ProductListByCategory(category) {
         return this.BaseURL + "/category/" + category;
     }
+
+    static ProductDetails(id) {
+        return this.BaseURL + "/productdetails/" + id;
+    }
 }
 
 export default appURL

@@ -1,25 +1,36 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment, useEffect, useState } from 'react'
 import Nav from '../components/common/Nav'
 import Footer from '../components/common/Footer'
 import ProductDetails from '../components/Products/ProductDetails'
 import SuggestedProduct from '../components/Products/SuggestedProduct'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import appURL from '../api/appURL'
 
-class ProductDetailsPage extends Component {
+function ProductDetailsPage() {
+  const { id } = useParams();
+  const [productData, setProductData] = useState([]);
 
-  componentDidMount() {
-    window.scroll(0, 0);
-  }
-  
-  render() {
-    return (
-      <Fragment>
+  useEffect(() => {
+  window.scroll(0, 0);
+
+  axios.get(appURL.ProductDetails(id)) 
+  .then(response => {
+    setProductData(response.data);
+  })
+  .catch(error => {
+    console.error("Error fetching product details:", error);
+  });
+  }, [id]);
+
+  return (
+    <Fragment>
         <Nav/>
-        <ProductDetails/>
+        <ProductDetails productData={productData}/>
         <SuggestedProduct/>
         <Footer/>
-      </Fragment>
-    )
-  }
+    </Fragment>
+  );
 }
 
-export default ProductDetailsPage
+export default ProductDetailsPage;

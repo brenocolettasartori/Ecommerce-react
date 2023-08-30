@@ -26,8 +26,8 @@ class HomePage extends Component {
     return (
       <Fragment>
         <Nav/>
-        <NewArrival />
         {/* <HomeTop/> */}
+        <NewArrival />
         <FeaturedProducts />
         <Categories />
         <Collection />

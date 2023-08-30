@@ -25,7 +25,7 @@ class AppRoute extends Component {
           <Route exact path="/purchase" element={ <PurchasePage /> } />
           <Route exact path="/privacy" element={ <PrivacyPage /> } />
           <Route exact path="/refund" element={ <RefundPage /> } />
-          <Route exact path="/productdetails" element={ <ProductDetailsPage /> } />
+          <Route exact path="/productdetails/:id" element={ <ProductDetailsPage /> } />
           <Route exact path="/notification" element={ <NotificationPage /> } />
           <Route exact path="/favorite" element={ <FavoritePage /> } />
           <Route exact path="/cart" element={ <CartPage /> } />

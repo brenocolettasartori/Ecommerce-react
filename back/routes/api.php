@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\VisitorController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductDetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +59,7 @@ Route::get('/type/{type}',[ProductController::class, 'ProductListByType']);
 
 // Product by category
 Route::get('/category/{category}',[ProductController::class, 'ProductListByCategory']);
+
+// Product Details
+Route::get('/productdetails/{id}',[ProductDetailsController::class, 'ProductDetails']);
 

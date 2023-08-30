@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import appURL from "../../api/appURL";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class NewArrival extends Component {
   
@@ -77,6 +78,7 @@ class NewArrival extends Component {
       if(newList.discount=="na"){
         return <div>
           <Card className="image-box card">
+          <Link to={"/productdetails/" + newList.id}>
           <img
             className="center"
             src={newList.image}
@@ -86,11 +88,13 @@ class NewArrival extends Component {
             <p className="product-name-on-card">{newList.title}</p>
             <p className="product-price-on-card">Price: {newList.price}</p>
           </div>
+          </Link>
         </Card>
         </div>
       } else {
         return <div>
           <Card className="image-box card">
+          <Link to={"/productdetails/" + newList.id}>
           <img
             className="center"
             src={newList.image}
@@ -100,6 +104,7 @@ class NewArrival extends Component {
               <p className="product-name-on-card">{newList.title}</p>
               <p className="product-price-on-card"><strike className="text-secondary">Price: {newList.price}</strike></p>
               </div>
+              </Link>
             </Card>
         </div>
       }

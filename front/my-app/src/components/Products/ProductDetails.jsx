@@ -2,7 +2,23 @@ import React, { Component, Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 class ProductDetails extends Component {
+
   render() {
+    let ProductAllData = this.props.productData;
+    console.log('ProductAllData:', ProductAllData);
+    if (!ProductAllData.product || ProductAllData.product.length === 0) {
+      return <div></div>;
+    }
+  
+    const product = ProductAllData.product[0];
+    const productDetails = ProductAllData.productDetails[0];
+
+    const productTitle = product.title;
+    const productImage1 = productDetails.image_one;
+    const productImage2 = productDetails.image_two;
+    const productImage3 = productDetails.image_three;
+    const productImage4 = productDetails.image_four;
+    console.log('Image URLs:', productImage1, productImage2, productImage3, productImage4);
     return (
       <Fragment>
         <Container fluid={true} className="BetweenTwoSection">
@@ -16,17 +32,17 @@ class ProductDetails extends Component {
             >
               <Row>
                 <Col className="p-3" md={6} lg={6} sm={12} xs={12}>
-                  <img className="w-100" src="#" />
+                  <img className="w-100" src={productImage1} />
                   <Container className="my-3">
                     <Row>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img className="w-100" src="#" />
+                        <img className="w-100" src={productImage2} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img className="w-100" src="#" />
+                        <img className="w-100" src={productImage3} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img className="w-100" src="#" />
+                        <img className="w-100" src={productImage4} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
                         <img className="w-100" src="#" />
@@ -36,7 +52,7 @@ class ProductDetails extends Component {
                 </Col>
                 <Col className="p-3 " md={6} lg={6} sm={12} xs={12}>
                   <h5 className="Product-Name">
-                    Lorem Ipsum
+                  {productTitle}
                   </h5>
                   <h6 className="section-sub-title">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio incidunt quidem beatae placeat.
