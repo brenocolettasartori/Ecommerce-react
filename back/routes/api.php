@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductDetailsController;
+use App\Http\Controllers\Admin\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,4 +63,7 @@ Route::get('/category/{category}',[ProductController::class, 'ProductListByCateg
 
 // Product Details
 Route::get('/productdetails/{id}',[ProductDetailsController::class, 'ProductDetails']);
+
+// Notification
+Route::get('/notification',[NotificationController::class, 'NotificationHistory']);
 

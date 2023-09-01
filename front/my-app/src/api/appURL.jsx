@@ -13,6 +13,8 @@ class appURL {
     static ProductDetails(id) {
         return this.BaseURL + "/productdetails/" + id;
     }
+
+    static NotificationHistory = this.BaseURL + "/notification"
 }
 
 export default appURL

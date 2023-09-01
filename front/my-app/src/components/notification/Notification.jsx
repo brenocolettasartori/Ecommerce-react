@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Col, Container, Row, Card, Button, Modal } from "react-bootstrap";
+import appURL from "../../api/appURL";
+import axios from "axios";
 
 class Notification extends Component {
   
@@ -7,107 +9,67 @@ class Notification extends Component {
     super();
     this.state = {
       show: false,
+      notificationData: [],
+      notificationMessage:"",
+      notificationTitle:"",
+      notificationDate:""
     };
+  }
+
+  componentDidMount() {
+    axios.get(appURL.NotificationHistory).then(response => {
+      this.setState({notificationData: response.data});
+    }).catch(error => {
+
+    });
   }
 
   handleClose = () => {
     this.setState({ show: false });
   };
 
-  handleShow = () => {
+  handleShow = (event) => {
     this.setState({ show: true });
+    let nMessage = event.target.getAttribute("data-message");
+    let nTitle = event.target.getAttribute("data-title");
+    let nDate = event.target.getAttribute("data-date");
+    this.setState({notificationMessage:nMessage, notificationTitle:nTitle, notificationDate:nDate})
   };
 
   render() {
+    const notificationList = this.state.notificationData;
+    const myView = notificationList.map((notificationList, i) => {
+      return <Col className=" p-1 " md={6} lg={6} sm={12} xs={12}>
+      <Card data-title={notificationList.title} data-date={notificationList.date} data-message={notificationList.message} onClick={this.handleShow} className="notification-card">
+        <Card.Body>
+          <h6>{notificationList.title}</h6>
+          <p className="py-1  px-0 text-primary m-0">
+            <i className="fa  fa-bell"></i> Date: {notificationList.date}<br/><br/>
+          </p>
+          <Button data-title={notificationList.title} data-date={notificationList.date} data-message={notificationList.message} className="btn btn-danger">Details</Button>
+        </Card.Body>
+      </Card>
+    </Col>
+    })
+
     return (
       <Fragment>
         <Container className="TopSection">
           <Row>
-            <Col className=" p-1 " md={6} lg={6} sm={12} xs={12}>
-              <Card onClick={this.handleShow} className="notification-card">
-                <Card.Body>
-                  <h6> Lorem Ipsum</h6>
-                  <p className="py-1  px-0 text-primary m-0">
-                    <i className="fa  fa-bell"></i> Date: 22/12/2010 | Status:
-                    Unread
-                  </p>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col className=" p-1 " md={6} lg={6} sm={12} xs={12}>
-              <Card onClick={this.handleShow} className="notification-card">
-                <Card.Body>
-                  <h6> Lorem Ipsum</h6>
-                  <p className="py-1   px-0 text-primary m-0">
-                    <i className="fa  fa-bell"></i> Date: 22/12/2010 | Status:
-                    Unread
-                  </p>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col className="p-1" md={6} lg={6} sm={12} xs={12}>
-              <Card onClick={this.handleShow} className="notification-card">
-                <Card.Body>
-                  <h6> Lorem Ipsum</h6>
-                  <p className="py-1  px-0 text-success m-0">
-                    <i className="fa  fa-bell"></i> Date: 22/12/2010 | Status:
-                    Read
-                  </p>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col className="p-1" md={6} lg={6} sm={12} xs={12}>
-              <Card onClick={this.handleShow} className="notification-card">
-                <Card.Body>
-                  <h5> Lorem Ipsum</h5>
-                  <p className="py-1  px-0 text-success m-0">
-                    <i className="fa fa-bell"></i> Date: 22/12/2010 | Status:
-                    Read
-                  </p>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col className="p-1" md={6} lg={6} sm={12} xs={12}>
-              <Card onClick={this.handleShow} className="notification-card">
-                <Card.Body>
-                  <h6> Lorem Ipsum</h6>
-                  <p className="py-1  px-0 text-success m-0">
-                    <i className="fa  fa-bell"></i> Date: 22/12/2010 | Status:
-                    Read
-                  </p>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col className="p-1" md={6} lg={6} sm={12} xs={12}>
-              <Card onClick={this.handleShow} className="notification-card">
-                <Card.Body>
-                  <h6> Lorem Ipsum</h6>
-                  <p className="py-1 px-0 text-success m-0">
-                    <i className="fa  fa-bell"></i> Date: 22/12/2010 | Status:
-                    Read
-                  </p>
-                </Card.Body>
-              </Card>
-            </Col>
+            {myView}
           </Row>
         </Container>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <h6>
-              <i className="fa fa-bell"></i> Date:11/05/2021
+              <i className="fa fa-bell"></i> Date:{this.state.notificationDate}
             </h6>
           </Modal.Header>
           <Modal.Body>
-            <h6>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h6>
+            <h6>{this.state.notificationTitle}</h6>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ab sed doloribus velit officiis ullam quo repellat harum asperiores quidem 
-                voluptatem tempora tempore, possimus magni suscipit, vel voluptatibus omnis quos.
+              {this.state.notificationMessage}
             </p>
           </Modal.Body>
           <Modal.Footer>
