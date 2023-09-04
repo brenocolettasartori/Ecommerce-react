@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import ReactDOM from 'react-dom'
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import { Link } from 'react-router-dom'
 
 class ProductDetails extends Component {
 
@@ -45,6 +47,9 @@ hasDiscount(productPrice, productDiscount){
     const productDiscount = product.discount;
     const productReview = product.review;
     const productStar = product.star;
+    const category = product.category;
+    const productId = product.id;
+    const title = product.title;
     const productImage1 = productDetails.image_one;
     const productImage2 = productDetails.image_two;
     const productImage3 = productDetails.image_three;
@@ -88,6 +93,13 @@ hasDiscount(productPrice, productDiscount){
     return (
       <Fragment>
         <Container fluid={true} className="BetweenTwoSection">
+        <div className="breadbody">
+          <Breadcrumb>
+            <Breadcrumb.Item> <Link to="/"> Home </Link> </Breadcrumb.Item>
+            <Breadcrumb.Item> <Link to={"/recommended/" + category}> {category} </Link> </Breadcrumb.Item> 
+            <Breadcrumb.Item> <Link to={"/productdetails/" + productId}> {title} </Link> </Breadcrumb.Item>   
+          </Breadcrumb>
+        </div>
           <Row className="p-2">
             <Col
               className="shadow-sm bg-white pb-3 mt-4"
@@ -102,16 +114,16 @@ hasDiscount(productPrice, productDiscount){
                   <Container className="my-3">
                     <Row>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img onClick={this.imgOnClick} className=" smallImage product-sm-img" src={productImage2} />
+                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className=" smallImage product-sm-img" src={productImage1} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img onClick={this.imgOnClick} className=" smallImage product-sm-img" src={productImage3} />
+                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className=" smallImage product-sm-img" src={productImage2} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img onClick={this.imgOnClick} className=" smallImage product-sm-img" src={productImage4} />
+                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className=" smallImage product-sm-img" src={productImage3} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img onClick={this.imgOnClick} className=" smallimage product-sm-img" src={productImage5} />
+                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className=" smallImage product-sm-img" src={productImage4} />
                       </Col>
                     </Row>
                   </Container>

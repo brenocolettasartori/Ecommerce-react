@@ -1,9 +1,17 @@
 import React, { Component, Fragment } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import styled from 'styled-components';
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
 
 class Category extends Component {
   render() {
+
 
     const myList = this.props.productData;
     const category = this.props.Category;
@@ -52,6 +60,12 @@ class Category extends Component {
     return (
         <Fragment>
         <Container className="text-center" fluid={true}>
+        <div className="breadbody">
+        <Breadcrumb>
+          <Breadcrumb.Item> <StyledLink to="/"> Home </StyledLink></Breadcrumb.Item>
+          <Breadcrumb.Item> <StyledLink to={"/recommended/" + category}> {category} </StyledLink></Breadcrumb.Item>   
+        </Breadcrumb>
+        </div>
         <div className="section-title text-center mb-55">
                 <h2>{category}</h2>
             </div>
