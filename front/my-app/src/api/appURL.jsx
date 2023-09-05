@@ -15,6 +15,10 @@ class appURL {
     }
 
     static NotificationHistory = this.BaseURL + "/notification"
+
+    static searchByProduct(key) {
+        return this.BaseURL + "/search/" + key;
+    }
 }
 
 export default appURL

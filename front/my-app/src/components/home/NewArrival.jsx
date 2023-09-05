@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import appURL from "../../api/appURL";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 class NewArrival extends Component {
   
@@ -36,15 +38,14 @@ class NewArrival extends Component {
 
   render() {
     var settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       speed: 500,
       autoplay: true,
       autoplaySpeed: 3000,
       slidesToShow: 4,
-      slidesToScroll: 1,
+      slidesToScroll: 1,  
       initialSlide: 0,
-
       responsive: [
         {
           breakpoint: 1024,
@@ -115,35 +116,39 @@ class NewArrival extends Component {
         <Container className="text-center" fluid={true}>
           <div className="section-title text-center mb-55">
             <h2>New arrival</h2>
-            <a className="btn btn-sm ml2 site-btn" onClick={this.previous}>
-              <i className="fa fa-angle-left"></i>
-            </a>
-            <a className="btn btn-sm ml2 site-btn" onClick={this.next}>
-              <i className="fa fa-angle-right"></i>
-            </a>
           </div>
           <Row>
-            <Slider ref={c=>(this.slider=c)}{...settings}>
-              {myView}
-              <div>
-                <h3>3</h3>
-              </div>
-              <div>
-                <h3>4</h3>
-              </div>
-              <div>
-                <h3>5</h3>
-              </div>
-              <div>
-                <h3>6</h3>
-              </div>
-              <div>
-                <h3>7</h3>
-              </div>
-              <div>
-                <h3>8</h3>
-              </div>
-            </Slider>
+          <div className="slider-container">
+              <Slider ref={(c) => (this.slider = c)} {...settings}>
+                {myView}
+                <div>
+                  <h3>3</h3>
+                </div>
+                <div>
+                  <h3>4</h3>
+                </div>
+                <div>
+                  <h3>5</h3>
+                </div>
+                <div>
+                  <h3>6</h3>
+                </div>
+                <div>
+                  <h3>7</h3>
+                </div>
+                <div>
+                  <h3>8</h3>
+                </div>
+              </Slider>
+            </div>
+            <div className="slider-nav">
+              <button className="slider-prev" onClick={this.previous}>
+                <FontAwesomeIcon icon={faAngleLeft} />
+              </button>
+              <button className="slider-next" onClick={this.next}>
+                <FontAwesomeIcon icon={faAngleRight} />
+              </button>
+            </div>
           </Row>
         </Container>
       </Fragment>

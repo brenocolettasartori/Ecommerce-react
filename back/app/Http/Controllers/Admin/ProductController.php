@@ -24,4 +24,10 @@ class ProductController extends Controller
         $productList = Product::where('category', $category)->get();
         return $productList;
     }
-}
+
+    public function searchByProduct (Request $request) {
+        $key = $request->key;
+        $productList = Product::whereRaw('title ILIKE ?', ["%{$key}%"])->get(); // procurar sequência de texto (key) em qualquer lugar
+        return $productList;
+    }
+ }

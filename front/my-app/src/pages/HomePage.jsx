@@ -3,7 +3,6 @@ import FeaturedProducts from "../components/home/FeaturedProducts";
 import Categories from "../components/home/Categories";
 import Collection from "../components/home/Collection";
 import NewArrival from "../components/home/NewArrival";
-import HomeTop from "../components/home/HomeTop";
 import Nav from "../components/common/Nav";
 import Footer from "../components/common/Footer";
 import appURL from "../api/appURL";
@@ -26,7 +25,6 @@ class HomePage extends Component {
     return (
       <Fragment>
         <Nav/>
-        {/* <HomeTop/> */}
         <NewArrival />
         <FeaturedProducts />
         <Categories />

@@ -12,6 +12,7 @@ import FavoritePage from '../pages/FavoritePage'
 import CartPage from '../pages/CartPage'
 import AboutPage from '../pages/AboutPage'
 import CategoryPage from '../pages/CategoryPage'
+import SearchPage from '../pages/SearchPage'
 
 
 class AppRoute extends Component {
@@ -31,6 +32,7 @@ class AppRoute extends Component {
           <Route exact path="/cart" element={ <CartPage /> } />
           <Route exact path="/about" element={ <AboutPage /> } />
           <Route exact path="/recommended/:category" element={<CategoryPage/>} />
+          <Route exact path="/pdsearch/:key" element={<SearchPage/>} />
         </Routes>
       </Fragment>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledSearchBar = styled.div`
@@ -28,29 +28,46 @@ const StyledInput = styled.input`
   font-weight: bold;
 `;
 
-const StyledCartButton = styled.button`
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  padding-right: 10px;
-`;
-
 const StyledIcon = styled.i`
   font-size: 16px; 
   margin-right: 5px; 
 `;
 
 class Nav extends Component {
-  state = {
-    loggedout: "",
-  };
+  constructor() {
+    super();
+    this.state = {
+      loggedout: "",
+      key: "",
+      searchStatus: false,
+    };
+    this.Search = this.Search.bind(this);
+    this.executeSearch = this.executeSearch.bind(this);
+    this.searchRedirect = this.searchRedirect.bind(this);
+  }
 
   logout = () => {
     localStorage.clear();
     this.props.setUser(null);
   };
+
+  Search(event) {
+    let key = event.target.value;
+    //console.log(key);
+    this.setState({key: key});
+  }
+
+  executeSearch () {
+    if(this.state.key.length >= 2) {
+      this.setState({searchStatus: true})
+    }
+  }
+
+  searchRedirect() {
+    if(this.state.searchStatus === true) {
+      return <Navigate to={"/pdsearch/" + this.state.key}/>
+    }
+  }
 
   render() {
     let buttons;
@@ -76,7 +93,7 @@ class Nav extends Component {
             <Link to="/favorite" className="btn"><StyledIcon className="fa h4 fa-heart"></StyledIcon><sup><span className="badge text-white bg-danger"></span></sup></Link>
           </li>
           <li className="nav-item">
-            <Link to="/notification" className="btn"><StyledIcon className="fa h4 fa-bell"></StyledIcon><sup><span className="badge text-white bg-danger"></span></sup></Link>
+          <Link to="/notification" className="btn"><StyledIcon className="fa h4 fa-bell"></StyledIcon><sup><span className="badge text-white bg-danger"></span></sup></Link>
           <Link to="/cart" className="btn"><StyledIcon className="fa fa-shopping-cart"><sup><span style={{ marginLeft: '5px' }} className="badge text-white bg-danger">3</span></sup></StyledIcon></Link>
           </li>
           <li className="nav-item">
@@ -103,11 +120,12 @@ class Nav extends Component {
             </Link>
             <StyledSearchBar>
               <StyledInput 
+                onChange={this.Search}
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button className="btn btn-outline-light" type="submit">
+              <button onClick={this.executeSearch} className="btn btn-outline-light" type="submit">
                 <i className="fas fa-search"></i>
               </button>
             </StyledSearchBar>
@@ -118,6 +136,7 @@ class Nav extends Component {
               <span className="navbar-text">{buttons}</span>
             </div>
           </div>
+          {this.searchRedirect()}
         </nav>
       </div>
     );
