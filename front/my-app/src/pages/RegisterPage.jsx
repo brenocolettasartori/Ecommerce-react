@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import Nav from '../components/common/Nav'
+import Register from '../components/common/Register'
 import Footer from '../components/common/Footer'
-import Login from '../components/common/Login'
 
-class LoginPage extends Component {
+export class RegisterPage extends Component {
   render() {
 
     const setUser = this.props.setUser;
@@ -12,11 +12,11 @@ class LoginPage extends Component {
     return (
       <Fragment>
         <Nav/>
-        <Login setUser = {setUser} user = {user}/>
+        <Register setUser={setUser} user ={user}/>
         <Footer/>
       </Fragment>
     )
   }
 }
 
-export default LoginPage
+export default RegisterPage

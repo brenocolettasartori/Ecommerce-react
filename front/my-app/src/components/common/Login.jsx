@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
+import axios from 'axios';
+import appURL from "../../api/appURL";
 
 const Container = styled.div`
   margin: 50px auto;
@@ -16,7 +17,7 @@ const Panel = styled.div`
 
 const InputField = styled.div`
   border-radius: 5px;
-  padding: 5px;
+  padding: 8px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -25,7 +26,7 @@ const InputField = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100%;
+    width: 100%;    
   }
 `;
 
@@ -78,41 +79,57 @@ const InputIcon = styled.i`
   margin-right: 10px;
 `;
 
-class Register extends Component {
+class LoginPage extends Component {
+
+    componentDidMount() {
+        window.scroll(0, 0);
+      }
 
   state = {
-    name:'',
     email:'',
     password:'',
-    password_confirmation:'',
     message:'',
   }
 
   formSubmit = (e) => {
     e.preventDefault();
     const data = {
-      name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      password_confirmation:this.state.password_confirmation
     }
 
-    axios.post('/register', data)
-      .then((response) => {
+    axios.post(appURL.userLogin, data)
+    .then((response) => {
+      if (response && response.status === 200 && response.data) {
         localStorage.setItem('token', response.data.token);
-        this.setState({
-          loggedIn: true
-        })
+        this.setState({loggedIn: true})
         this.props.setUser(response.data.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    })
+    .catch((error) => {
+      if (error.response && error.response.data) {
+        this.setState({message: error.response.data.message})
+      }
+    });
   }
 
   render() {
+
     if(this.state.loggedIn){
       return <Navigate to={'/profile'}/>
+    }
+
+    if(localStorage.getItem('token')){
+      return <Navigate to={'/profile'}/>
+    }
+
+    let error="";
+    if(this.state.message) {
+      error = (
+        <div>
+          <div className="alert alert-danger" role="alert">{this.state.message}</div>
+        </div>
+      )
     }
     return (
       <div>
@@ -121,29 +138,16 @@ class Register extends Component {
             <div className="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
               <Panel>
                 <div className="panel-heading">
-                  <h3 className="pt-3 font-weight-bold">Sign Up</h3>
+                  <h3 className="pt-3 font-weight-bold">Login</h3>
                 </div>
                 <div className="panel-body p-3">
                   <form onSubmit={this.formSubmit}>
                     <div className="form-group py-2">
                       <InputField>
                         <span className="p-2">
-                          <InputIcon className="fa fa-user"></InputIcon>
-                          <StyledInput
-                            type="text"
-                            placeholder="Name"
-                            required
-                            onChange={(e)=>{this.setState({name:e.target.value})}}
-                          />
-                        </span>
-                      </InputField>
-                    </div>
-                    <div className="form-group py-1 pb-2">
-                      <InputField>
-                        <span className="px-2">
                           <InputIcon className="fa fa-envelope"></InputIcon>
                           <StyledInput
-                            type="email"
+                            type="text"
                             placeholder="Email"
                             required
                             onChange={(e)=>{this.setState({email:e.target.value})}}
@@ -164,30 +168,13 @@ class Register extends Component {
                         </span>
                       </InputField>
                     </div>
-                    <div className="form-group py-1 pb-2">
-                      <InputField>
-                        <span className="px-2">
-                          <InputIcon className="fas fa-lock"></InputIcon>
-                          <StyledInput
-                            type="password"
-                            placeholder="Confirm Password"
-                            required
-                            onChange={(e)=>{this.setState({password_confirmation:e.target.value})}}
-                          />
-                        </span>
-                      </InputField>
-                    </div>
-                    <StyledButton
-                      type="submit"
-                      className="btn btn-primary btn-block mt-3"
-                    >
-                      Register
-                    </StyledButton>
-                    <div className="text-center pt-4 text-muted">
-                      Already have an account?{" "}
-                      <Link to="/login">Login</Link>{" "}
-                    </div>
-                    <div className="text-center pt-4 text-muted">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="d-flex align-items-center">
+                        <input type="checkbox" name="remember" id="remember" className="mr-2"/>
+                        <label htmlFor="remember" className="text-muted ml-2">
+                          Remember me
+                        </label>
+                      </div>
                       <Link
                         to="/forget"
                         id="forgot"
@@ -196,7 +183,19 @@ class Register extends Component {
                         Forgot Password?
                       </Link>
                     </div>
+                    <StyledButton
+                      type="submit"
+                      className="btn btn-primary btn-block mt-3"
+                    >
+                      Login
+                    </StyledButton>
+                    <div className="text-center pt-4 text-muted">
+                      Don't have an account?{" "}
+                      <Link to="/register">Sign up</Link>{" "}
+                    </div>
                   </form>
+                  <br></br>
+                  { error }
                 </div>
                 <StyledDiv>
                   <div className="text-center py-3">
@@ -244,4 +243,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default LoginPage;

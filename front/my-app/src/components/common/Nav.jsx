@@ -48,7 +48,6 @@ class Nav extends Component {
 
   logout = () => {
     localStorage.clear();
-    this.props.setUser(null);
   };
 
   Search(event) {
@@ -113,7 +112,7 @@ class Nav extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav fixed={"top"} className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
               React E-commerce

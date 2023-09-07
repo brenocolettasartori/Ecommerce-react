@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import appURL from "../../api/appURL";
 
 const Container = styled.div`
   margin: 50px auto;
@@ -97,7 +98,7 @@ class Register extends Component {
       password_confirmation:this.state.password_confirmation
     }
 
-    axios.post('/register', data)
+    axios.post(appURL.userRegister, data)
       .then((response) => {
         localStorage.setItem('token', response.data.token);
         this.setState({
@@ -114,6 +115,10 @@ class Register extends Component {
     if(this.state.loggedIn){
       return <Navigate to={'/profile'}/>
     }
+
+    if(localStorage.getItem('token')){
+      return <Navigate to="/profile" />
+ }
     return (
       <div>
         <Container>

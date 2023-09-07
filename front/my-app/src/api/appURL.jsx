@@ -19,6 +19,12 @@ class appURL {
     static searchByProduct(key) {
         return this.BaseURL + "/search/" + key;
     }
+    
+    static userLogin = this.BaseURL + "/login"
+    static userData = this.BaseURL + "/user"
+    static userRegister = this.BaseURL + "/register"
+    static userForget = this.BaseURL + "/forgetpassword";
+    static userReset = this.BaseURL + "/resetpassword";
 }
 
 export default appURL

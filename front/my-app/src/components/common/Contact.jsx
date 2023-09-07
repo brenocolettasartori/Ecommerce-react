@@ -154,7 +154,6 @@ class Contact extends Component {
                                         onSubmit={this.onFormSubmit}
                                         className="border-right pr-5 mb-5"
                                         // method="post"
-                                        id="contactForm"
                                         name="contactForm"
                                     >
                                         <div className="row">

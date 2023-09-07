@@ -21,6 +21,7 @@
     height: 700px;
     margin-left: 150px;
 }
+
 .smallImage{
     height: 200px;
     
@@ -28,6 +29,7 @@
 .product-sm-img{
 
 }
+
 .product-sm-img:hover{
    cursor: pointer;
 }

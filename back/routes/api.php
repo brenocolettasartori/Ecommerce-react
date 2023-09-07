@@ -41,7 +41,7 @@ Route::post('/forgetpassword',[ForgetController::class, 'ForgetPassword']);
 Route::post('/resetpassword',[ResetController::class, 'ResetPassword']);
 
 // User
-Route::get('/user',[UserController::class, 'User'])->middleware('auth:sanctum');
+Route::get('/user',[UserController::class, 'User'])->middleware('auth:api');
 
 // Visitor
 Route::get('/getvisitor',[VisitorController::class, 'GetVisitorDetails']);

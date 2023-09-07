@@ -3,10 +3,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import ReactDOM from 'react-dom'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import { Link } from 'react-router-dom'
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
 
 class ProductDetails extends Component {
 
-  imgOnClick(event){
+  imgOnClick = (event) => {
     let imgSrc = event.target.getAttribute('src');
     let previewImg = document.getElementById('previewImg');
          ReactDOM.findDOMNode(previewImg).setAttribute('src',imgSrc)
@@ -38,7 +39,7 @@ hasDiscount(productPrice, productDiscount){
     if (!ProductAllData.product || ProductAllData.product.length === 0) {
       return <div></div>;
     }
-  
+
     const product = ProductAllData.product[0];
     const productDetails = ProductAllData.productDetails[0];
 
@@ -114,13 +115,13 @@ hasDiscount(productPrice, productDiscount){
                   <Container className="my-3">
                     <Row>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className=" smallImage product-sm-img" src={productImage1} />
+                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className="smallImage product-sm-img" src={productImage1} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className=" smallImage product-sm-img" src={productImage2} />
+                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className="smallImage product-sm-img" src={productImage2} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
-                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className=" smallImage product-sm-img" src={productImage3} />
+                        <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className="smallImage product-sm-img" src={productImage3} />
                       </Col>
                       <Col className="p-0 m-0" md={3} lg={3} sm={3} xs={3}>
                         <img onMouseOver={this.imgOnClick} onMouseOut={this.imgOnMouseOut} className=" smallImage product-sm-img" src={productImage4} />

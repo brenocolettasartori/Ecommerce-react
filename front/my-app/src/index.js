@@ -8,6 +8,8 @@ import '../src/assets/css/fontawesome.css'
 import '../src/assets/css/animate.min.css'
 import App from './App';
 
+
+
 axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 
