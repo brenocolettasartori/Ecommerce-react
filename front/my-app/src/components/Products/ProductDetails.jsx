@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import { Link } from 'react-router-dom'
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
+import SuggestedProduct from '../Products/SuggestedProduct'
 
 class ProductDetails extends Component {
 
@@ -197,6 +198,7 @@ hasDiscount(productPrice, productDiscount){
             </Col>
           </Row>
         </Container>
+        <SuggestedProduct category = {category}/>
       </Fragment>
     );
   }

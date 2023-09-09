@@ -27,7 +27,7 @@ function ProductDetailsPage() {
     <Fragment>
         <Nav/>
         <ProductDetails productData={productData}/>
-        <SuggestedProduct/>
+        {/* <SuggestedProduct/> */}
         <Footer/>
     </Fragment>
   );

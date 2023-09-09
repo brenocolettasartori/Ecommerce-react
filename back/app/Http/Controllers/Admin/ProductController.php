@@ -30,4 +30,10 @@ class ProductController extends Controller
         $productList = Product::whereRaw('title ILIKE ?', ["%{$key}%"])->get(); // procurar sequência de texto (key) em qualquer lugar
         return $productList;
     }
+
+    public function relatedProduct (Request $request) {
+        $category = $request->category;
+        $productList = Product::where('category', $category)->orderBy('id', 'desc')->limit(6)->get();
+        return $productList;
+    }
  }
