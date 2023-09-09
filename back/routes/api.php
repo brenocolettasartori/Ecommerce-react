@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductDetailsController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,3 +73,6 @@ Route::get('/search/{key}',[ProductController::class, 'searchByProduct']);
 
 // Related product
 Route::get('/related/{category}',[ProductController::class, 'relatedProduct']);
+
+// Review
+Route::get('/review/{id}',[ReviewController::class, 'listReview']);

@@ -5,6 +5,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import { Link } from 'react-router-dom'
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
 import SuggestedProduct from '../Products/SuggestedProduct'
+import Reviews from "./Reviews";
 
 class ProductDetails extends Component {
 
@@ -180,19 +181,7 @@ hasDiscount(productPrice, productDiscount){
                 </Col>
 
                 <Col className="" md={6} lg={6} sm={12} xs={12}>
-                  <h6 className="mt-2">Reviews</h6>
-                  <p className=" p-0 m-0">
-                    <span className="Review-Title">Lorem Ipsum</span>{" "}
-                    <span className="text-success">
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                      <i className="fa fa-star"></i>{" "}
-                    </span>{" "}
-                  </p>
-                  <p>
-                    {productReview}
-                  </p>
+                  <Reviews id={productId}/>
                 </Col>
               </Row>
             </Col>

@@ -29,6 +29,10 @@ class appURL {
     static relatedProduct(category) {
         return this.BaseURL + "/related/" + category;
     }
+
+    static listReview(id) {
+        return this.BaseURL + "/review/" + id;
+    }
 }
 
 export default appURL
