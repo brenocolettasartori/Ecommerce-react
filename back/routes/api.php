@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductDetailsController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +77,9 @@ Route::get('/related/{category}',[ProductController::class, 'relatedProduct']);
 
 // Review
 Route::get('/review/{id}',[ReviewController::class, 'listReview']);
+
+// Cart
+Route::post('/cart',[CartController::class, 'addToCart']);
+
+// Count items in cart
+Route::get('/cartcount/{product_code}' ,[CartController::class, 'cartCount']);

@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import appURL from '../api/appURL'
 
-function ProductDetailsPage() {
+function ProductDetailsPage(props) {
   const { id } = useParams();
   const [productData, setProductData] = useState([]);
 
@@ -23,10 +23,12 @@ function ProductDetailsPage() {
   });
   }, [id]);
 
+  const user = props.user;
+
   return (
     <Fragment>
         <Nav/>
-        <ProductDetails productData={productData}/>
+        <ProductDetails productData={productData} user={user}/>
         {/* <SuggestedProduct/> */}
         <Footer/>
     </Fragment>

@@ -33,6 +33,12 @@ class appURL {
     static listReview(id) {
         return this.BaseURL + "/review/" + id;
     }
+
+    static addToCart = this.BaseURL + "/cart";
+
+    static cartCount(product_code){
+        return this.BaseURL + "/cartcount/" + product_code;
+   }
 }
 
 export default appURL

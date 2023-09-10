@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link, Navigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from 'axios' 
+import appURL from "../../api/appURL";
 
 const StyledSearchBar = styled.div`
   margin-left: 100px;
@@ -40,6 +42,7 @@ class Nav extends Component {
       loggedout: "",
       key: "",
       searchStatus: false,
+      cartCount: 0,
     };
     this.Search = this.Search.bind(this);
     this.executeSearch = this.executeSearch.bind(this);
@@ -68,12 +71,29 @@ class Nav extends Component {
     }
   }
 
+  componentDidMount(){
+    let product_code = this.props.product_code;
+    axios.get(appURL.cartCount(product_code))
+    .then((response) => {
+         this.setState({cartCount:response.data})
+    })
+}
+
   render() {
     let buttons;
 
     if (localStorage.getItem("token")) {
       buttons = (
         <div>
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+            <Link to="/favorite" className="btn"><StyledIcon className="fa h4 fa-heart"></StyledIcon><sup><span className="badge text-white bg-danger"></span></sup></Link>
+          </li>
+          <li className="nav-item">
+          <Link to="/notification" className="btn"><StyledIcon className="fa h4 fa-bell"></StyledIcon><sup><span className="badge text-white bg-danger"></span></sup></Link>
+          </li>
+          <Link to="/cart" className="btn"><StyledIcon className="fa fa-shopping-cart"><sup><span style={{ marginLeft: '5px' }} className="badge text-white bg-danger">{this.state.cartCount}</span></sup></StyledIcon></Link>
+          <li className="nav-item">
           <Link
             onClick={this.logout}
             className="nav-link active"
@@ -82,6 +102,8 @@ class Nav extends Component {
           >
             Logout
           </Link>
+          </li>
+          </ul>
         </div>
       );
     } else {
@@ -93,8 +115,8 @@ class Nav extends Component {
           </li>
           <li className="nav-item">
           <Link to="/notification" className="btn"><StyledIcon className="fa h4 fa-bell"></StyledIcon><sup><span className="badge text-white bg-danger"></span></sup></Link>
-          <Link to="/cart" className="btn"><StyledIcon className="fa fa-shopping-cart"><sup><span style={{ marginLeft: '5px' }} className="badge text-white bg-danger">3</span></sup></StyledIcon></Link>
           </li>
+          <Link to="/cart" className="btn"><StyledIcon className="fa fa-shopping-cart"><sup><span style={{ marginLeft: '5px' }} className="badge text-white bg-danger"></span></sup></StyledIcon></Link>
           <li className="nav-item">
             <Link className="nav-link active" aria-current="page" to="/login">
               Login
