@@ -39,6 +39,20 @@ class appURL {
     static cartCount(product_code){
         return this.BaseURL + "/cartcount/" + product_code;
    }
+
+   static addToFavorite(product_code, email){
+    return this.BaseURL + "/favorite/"  + product_code + "/" + email;
+   }
+
+   static listFavorite(email){
+    return this.BaseURL + "/listfavorite/" + email;
+   }
+
+   static removeFavorite(product_code, email){
+    return this.BaseURL + "/deletefavorite/" + product_code + "/" + email;
+   }
+
+
 }
 
 export default appURL

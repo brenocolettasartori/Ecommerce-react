@@ -59,7 +59,7 @@ class AppRoute extends Component {
           <Route exact path="/refund" element={ <RefundPage /> } />
           <Route exact path="/productdetails/:id" element={ <ProductDetailsPage user={this.state.user} /> } />
           <Route exact path="/notification" element={ <NotificationPage /> } />
-          <Route exact path="/favorite" element={ <FavoritePage /> } />
+          <Route exact path="/favorite" element={ <FavoritePage user={this.state.user} /> } />
           <Route exact path="/cart" element={ <CartPage /> } />
           <Route exact path="/about" element={ <AboutPage /> } />
           <Route exact path="/recommended/:category" element={<CategoryPage/>} />

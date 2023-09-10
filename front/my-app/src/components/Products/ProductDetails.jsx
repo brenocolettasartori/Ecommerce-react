@@ -92,8 +92,10 @@ class ProductDetails extends Component {
         .post(appURL.addToCart, formData)
         .then((response) => {
           if (response.data === 1) {
-            cogoToast.success("Product added.", { position: "top-right" });
-            this.setState({pageRefresh: true})
+            cogoToast.success("Product added in your cart successfully.", {
+              position: "top-right",
+            });
+            this.setState({ pageRefresh: true });
           } else {
             cogoToast.error("Something went wrong. Please try again", {
               position: "top-right",
@@ -109,10 +111,40 @@ class ProductDetails extends Component {
   };
 
   pageRefresh = () => {
-    if(this.state.pageRefresh){
+    if (this.state.pageRefresh) {
       window.location.reload();
     }
-}
+  };
+
+  addToFav = () => {
+    let productCode = this.state.confirmCode;
+    let email = this.props.user.email;
+
+    if (!localStorage.getItem("token")) {
+      cogoToast.warn("Please you have to be logged to add to favorites", {
+        position: "top-right",
+      });
+    } else {
+      axios
+        .get(appURL.addToFavorite(productCode, email))
+        .then((response) => {
+          if (response.data === 1) {
+            cogoToast.success("Product added to your favorites.", {
+              position: "top-right",
+            });
+          } else {
+            cogoToast.error("Something went wrong. Please try again", {
+              position: "top-right",
+            });
+          }
+        })
+        .catch((error) => {
+          cogoToast.error("Something went wrong. Please try again", {
+            position: "top-right",
+          });
+        });
+    }
+  };
 
   render() {
     let ProductAllData = this.props.productData;
@@ -309,7 +341,7 @@ class ProductDetails extends Component {
                       {" "}
                       <i className="fa fa-car"></i> Order Now
                     </button>
-                    <button className="btn btn-primary m-1">
+                    <button onClick={this.addToFav} className="btn btn-primary m-1">
                       {" "}
                       <i className="fa fa-heart"></i> Favorite
                     </button>

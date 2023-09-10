@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ProductDetailsController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,3 +84,12 @@ Route::post('/cart',[CartController::class, 'addToCart']);
 
 // Count items in cart
 Route::get('/cartcount/{product_code}' ,[CartController::class, 'cartCount']);
+
+// Favorite
+Route::get('/favorite/{product_code}/{email}',[FavoriteController::class, 'addToFavorite']);
+
+// List favorite
+Route::get('/listfavorite/{email}',[FavoriteController::class, 'listFavorite']);
+
+// Delete favorite
+Route::get('/deletefavorite/{product_code}/{email}',[FavoriteController::class, 'removeFavorite']);

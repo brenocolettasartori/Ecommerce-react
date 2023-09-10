@@ -10,10 +10,12 @@ class FavoritePage extends Component {
   }
 
   render() {
+    const user = this.props.user;
+
     return (
       <Fragment>
         <Nav/>
-        <Favorite/>
+        <Favorite user = {user}/>
         <Footer/>
       </Fragment>
     )
