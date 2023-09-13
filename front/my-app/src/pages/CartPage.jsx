@@ -10,10 +10,12 @@ class CartPage extends Component {
   }
   
   render() {
+    const user = this.props.user;
+    
     return (
       <Fragment>
         <Nav/>
-        <Cart/>
+        <Cart user={user}/>
         <Footer/>
       </Fragment>
     )

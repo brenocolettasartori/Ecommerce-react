@@ -34,13 +34,13 @@ class ProductDetails extends Component {
     if (productDiscount === "na") {
       return (
         <div className="input-group">
-          <div className="Product-price-card d-inline ">{productPrice}</div>
+          <div className="Product-price-card d-inline ">R$ {productPrice}</div>
         </div>
       );
     } else {
       return (
         <div className="input-group">
-          <div className="Product-price-card d-inline ">{productDiscount}</div>
+          <div className="Product-price-card d-inline ">R$ {productDiscount}</div>
         </div>
       );
     }

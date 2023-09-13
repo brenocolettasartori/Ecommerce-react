@@ -52,6 +52,27 @@ class appURL {
     return this.BaseURL + "/deletefavorite/" + product_code + "/" + email;
    }
 
+   static listCart(email){
+    return this.BaseURL + "/listcart/" + email;
+   }
+
+   static removeCart(product_code, email){
+    return this.BaseURL + "/deletecart/" + product_code + "/" + email;
+   }
+
+   static addItem(id, quantity, price){
+    return this.BaseURL + "/itemadd/" + id + "/" + quantity + "/" + price;
+}
+
+   static removeItem(id, quantity, price){
+    return this.BaseURL + "/itemremove/" + id + "/" + quantity + "/" + price;
+}
+
+   static Order = this.BaseURL + "/order";
+
+   static orderListByEmail(email){
+    return this.BaseURL + "/orderlist/" + email;
+}
 
 }
 

@@ -19,6 +19,7 @@ import ProfilePage from '../pages/ProfilePage'
 import axios from 'axios'
 import appURL from '../api/appURL'
 import ResetPwPage from '../pages/ResetPwPage'
+import OrderListPage from '../pages/OrderListPage'
 
 
 
@@ -60,10 +61,11 @@ class AppRoute extends Component {
           <Route exact path="/productdetails/:id" element={ <ProductDetailsPage user={this.state.user} /> } />
           <Route exact path="/notification" element={ <NotificationPage /> } />
           <Route exact path="/favorite" element={ <FavoritePage user={this.state.user} /> } />
-          <Route exact path="/cart" element={ <CartPage /> } />
+          <Route exact path="/cart" element={ <CartPage user={this.state.user} /> } />
           <Route exact path="/about" element={ <AboutPage /> } />
           <Route exact path="/recommended/:category" element={<CategoryPage/>} />
           <Route exact path="/pdsearch/:key" element={<SearchPage/>} />
+          <Route exact path="/orderlist" element={<OrderListPage user={this.state.user}/>} />
         </Routes>
       </Fragment>
     )

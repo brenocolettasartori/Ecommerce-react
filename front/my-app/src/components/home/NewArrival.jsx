@@ -9,6 +9,14 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
+const navButtonStyle = {
+  backgroundColor: 'transparent',
+  border: 'none',
+  fontSize: '24px',
+  color: '#000', // Cor das setas
+  cursor: 'pointer',
+};
+
 class NewArrival extends Component {
   
     constructor(props) {
@@ -113,7 +121,7 @@ class NewArrival extends Component {
 
     return (
       <Fragment>
-        <Container className="text-center" fluid={true}>
+        <Container className="text-center" >
           <div className="section-title text-center mb-55">
             <h2>New arrival</h2>
           </div>
@@ -142,10 +150,10 @@ class NewArrival extends Component {
               </Slider>
             </div>
             <div className="slider-nav">
-              <button className="slider-prev" onClick={this.previous}>
+              <button className="slider-prev" onClick={this.previous} style={navButtonStyle}>
                 <FontAwesomeIcon icon={faAngleLeft} />
               </button>
-              <button className="slider-next" onClick={this.next}>
+              <button className="slider-next" onClick={this.next} style={navButtonStyle}>
                 <FontAwesomeIcon icon={faAngleRight} />
               </button>
             </div>
