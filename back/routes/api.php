@@ -112,3 +112,5 @@ Route::post('/order', [CartController::class, 'Order']);
 // Order list by email
 Route::get('/orderlist/{email}', [CartController::class, 'orderListByEmail']);
 
+// Post review
+Route::post('/postreview',[ReviewController::class, 'postReview']);

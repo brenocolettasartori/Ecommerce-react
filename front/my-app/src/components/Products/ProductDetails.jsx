@@ -75,7 +75,7 @@ class ProductDetails extends Component {
     } else if (confirmSize === "YES" && productSize.length === 0) {
       cogoToast.error("Please select a size", { position: "top-right" });
     } else if (productQuantity.length === 0) {
-      cogoToast.error("Please Select Quantity", { position: "top-right" });
+      cogoToast.error("Please select quantity", { position: "top-right" });
     } else if (!localStorage.getItem("token")) {
       cogoToast.warn("Please Login to keep shopping", {
         position: "top-right",
@@ -145,6 +145,56 @@ class ProductDetails extends Component {
         });
     }
   };
+
+  orderNow = () => {
+    let confirmSize = this.state.confirmSize;
+    let confirmColor = this.state.confirmColor;
+    let productColor = this.state.color;
+    let productSize = this.state.size;
+    let productQuantity = this.state.quantity;
+    let productCode = this.state.confirmCode;
+    let email = this.props.user.email;
+
+    if(confirmColor === "YES" && productColor.length === 0){
+         cogoToast.error('Please select a color', {position:'top-right'});
+    }
+    else if(confirmSize === "YES" && productSize.length === 0){
+         cogoToast.error('Please select a size', {position:'top-right'});
+    } 
+    else if(productQuantity.length === 0){
+         cogoToast.error('Please select quantity', {position:'top-right'});
+    }
+    else if (!localStorage.getItem('token')){
+         cogoToast.warn('Please loggin to keep shopping', {position:'top-right'});
+    }
+    else{
+         this.setState({addToCart:"Adding..."})
+         let formData = new FormData();
+         formData.append("color", productColor);
+         formData.append("size", productSize);
+         formData.append("quantity", productQuantity);
+         formData.append("product_code", productCode);
+         formData.append("email",email);
+
+         axios.post(appURL.addToCart, formData)
+         .then(response => {
+              if(response.data === 1){
+                   cogoToast.success("Product added in your cart successfully.", {position:'top-right'});
+                   this.setState({ pageRefresh: true })    
+              }
+              else{
+                   cogoToast.error("Something went wrong. Please try again", {position:'top-right'});
+                   this.setState({addToCart:"Add To Cart"})
+              }
+
+         }).catch(error=>{
+              cogoToast.error("Something went wrong. Please try again", {position:'top-right'});
+                   this.setState({addToCart:"Add To Cart"})
+         });
+    }          
+
+
+} 
 
   render() {
     let ProductAllData = this.props.productData;
@@ -337,7 +387,7 @@ class ProductDetails extends Component {
                       {" "}
                       <i className="fa fa-shopping-cart"></i> Add To Cart
                     </button>
-                    <button className="btn btn-primary m-1">
+                    <button onClick={this.orderNow} className="btn btn-primary m-1">
                       {" "}
                       <i className="fa fa-car"></i> Order Now
                     </button>

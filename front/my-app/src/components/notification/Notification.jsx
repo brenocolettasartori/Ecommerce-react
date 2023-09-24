@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Col, Container, Row, Card, Button, Modal } from "react-bootstrap";
 import appURL from "../../api/appURL";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 class Notification extends Component {
   
@@ -37,6 +38,11 @@ class Notification extends Component {
   };
 
   render() {
+
+    if(!localStorage.getItem('token')){
+      return <Navigate to="/login" />
+ }
+
     const notificationList = this.state.notificationData;
     const myView = notificationList.map((notificationList, i) => {
       return <Col className=" p-1 " md={6} lg={6} sm={12} xs={12}>

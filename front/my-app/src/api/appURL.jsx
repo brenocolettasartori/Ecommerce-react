@@ -74,6 +74,8 @@ class appURL {
     return this.BaseURL + "/orderlist/" + email;
 }
 
+    static postReview = this.BaseURL + "/postreview"
+
 }
 
 export default appURL
