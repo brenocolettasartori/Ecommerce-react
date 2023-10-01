@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('admin.index');
+})->name('dashboard');
+ 
+// Logout 
+Route::get('/logout',[AdminController::class, 'Logout'])->name('admin.logout');
+
+//Route::middleware(['auth:sanctum', 'verified'])->get('/profile', [AdminController::class, 'userProfile'])->name('user.profile');
+
+Route::prefix('admin')->group(function(){
+
+    Route::get('/profile', [AdminController::class, 'userProfile'])->name('user.profile');
+
+    Route::post('/user/profile/store',[AdminController::class, 'userStore'])->name('user.profile.store');
+    
 });
+
+// Route::post('/user/profile/store',[AdminController::class, 'UserProfileStore'])->name('user.profile.store');
+
+// Route::get('/change/password',[AdminController::class, 'ChangePassword'])->name('change.password');
+
+// Route::post('/change/password/update',[AdminController::class, 'ChangePasswordUpdate'])->name('change.password.update');
+
