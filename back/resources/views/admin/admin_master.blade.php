@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
 	<link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+	<link href="{{ asset('assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
 	<title>E-commerce React</title>
 </head>
 
@@ -218,6 +219,8 @@ $(function(){
     });
   });
 </script>
+
+<script src="{{ asset('assets/plugins/input-tags/js/tagsinput.js') }}"></script>
 
 </body>
 
